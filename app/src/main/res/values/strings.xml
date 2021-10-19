@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Movies App</string>
+    <string name="generic_no_internet">No internet connection</string>
+    <string name="main_bar_title">Incoming Item Feed</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="input_filter">filter by weight</string>
+    <string name="filter_button_text">Filter now</string>
+    <string name="popular">Popular</string>
+    <string name="displaying">Displaying</string>
+    <string name="favorites">Favorites</string>
+</resources>
