@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MoviesApp">
-        
+
         <activity android:name="com.pilltracker.movies.ui.flow.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
