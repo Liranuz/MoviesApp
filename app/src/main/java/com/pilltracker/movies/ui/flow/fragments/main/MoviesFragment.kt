@@ -5,19 +5,22 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.pilltracker.movies.R
+import com.pilltracker.movies.data.network.Resource
 import com.pilltracker.movies.databinding.FragmentMoviesBinding
 import com.pilltracker.movies.model.Result
 import com.pilltracker.movies.ui.base.BaseFragment
 import com.pilltracker.movies.ui.flow.activity.MainViewModel
 import com.pilltracker.movies.ui.flow.fragments.main.adapter.MoviesAdapter
+import retrofit2.HttpException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 
 class MoviesFragment : BaseFragment<MoviesViewModel, FragmentMoviesBinding>(
     FragmentMoviesBinding::inflate
 ) {
-
-    private val sharedViewModel: MainViewModel by activityViewModels()
 
     @Inject
     lateinit var moviesAdapter: MoviesAdapter
@@ -29,7 +32,6 @@ class MoviesFragment : BaseFragment<MoviesViewModel, FragmentMoviesBinding>(
         initListeners()
 
     }
-
 
     override fun initData() {
         viewModel.getPopularMovies()
@@ -50,7 +52,7 @@ class MoviesFragment : BaseFragment<MoviesViewModel, FragmentMoviesBinding>(
 
 
             buttonFilterFavorites.setOnClickListener {
-                moviesAdapter.updateMovies(sharedViewModel.favorites)
+                viewModel.getFavoritesMovies()
             }
         }
 
@@ -62,8 +64,29 @@ class MoviesFragment : BaseFragment<MoviesViewModel, FragmentMoviesBinding>(
 
     override fun observeViewModel() {
 
-        viewModel.getMovies.observe(this){
-            moviesAdapter.updateMovies(it)
+        viewModel.getMovies.observe(this){ response ->
+            when(response.status){
+                Resource.Status.SUCCESS ->  moviesAdapter.updateMovies(response.data!!)
+                Resource.Status.ERROR -> showErrorDialog(response.throwable)
+                Resource.Status.LOADING -> showLoading(true)
+                Resource.Status.HIDE_LOADING -> showLoading(false)
+            }
+        }
+    }
+
+    private fun showErrorDialog(throwable: Throwable?) {
+
+        var message = getString(R.string.general_error)
+        if(throwable is SocketTimeoutException) {
+            message = getString(R.string.error_timeout)
+        } else if(throwable is HttpException && throwable.code() == 404){
+            message = getString(R.string.error_404)
+        }
+
+        val materialAlertDialog = MaterialAlertDialogBuilder(requireActivity())
+        materialAlertDialog.setMessage(message)
+        materialAlertDialog.setPositiveButton(getString(R.string.ok)) { d, _ ->
+            d.dismiss()
         }
     }
 

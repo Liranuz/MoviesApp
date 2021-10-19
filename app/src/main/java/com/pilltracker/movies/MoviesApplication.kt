@@ -9,7 +9,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MoviesApplication : Application(), HasAndroidInjector {
+class MoviesApplication : Application(), HasAndroidInjector, LifecycleObserver {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -23,5 +23,20 @@ class MoviesApplication : Application(), HasAndroidInjector {
         super.onCreate()
         AppInjector.init(this)
 
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onAppBackground(){
+        app = this
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onAppForeground() {
+        app = this
+    }
+
+
+    companion object {
+        var app: MoviesApplication? = null
     }
 }

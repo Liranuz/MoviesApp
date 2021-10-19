@@ -1,4 +1,4 @@
-package com.pilltracker.movies.network
+package com.pilltracker.movies.data.network
 
 import okio.IOException
 

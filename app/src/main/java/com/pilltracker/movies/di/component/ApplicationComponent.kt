@@ -2,6 +2,7 @@ package com.pilltracker.movies.di.component
 
 import android.app.Application
 import com.pilltracker.movies.MoviesApplication
+import com.pilltracker.movies.di.module.RoomModule.StorageModule
 import com.pilltracker.movies.di.module.RxModule
 import com.pilltracker.movies.di.module.activites.ActivitiesBuilderModule
 import com.pilltracker.movies.di.module.application.ApplicationModule
@@ -16,8 +17,8 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ApplicationModule::class,
         ActivitiesBuilderModule::class,
-        RxModule::class
-
+        RxModule::class,
+        StorageModule::class
     ]
 )
 interface ApplicationComponent {

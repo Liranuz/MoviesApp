@@ -3,33 +3,29 @@ package com.pilltracker.movies.extentions
 import android.os.SystemClock
 import android.view.View
 import android.widget.Button
+import androidx.lifecycle.MutableLiveData
+import com.pilltracker.movies.data.network.Resource
 
 fun View.visible(isVisible: Boolean, nonVisibleMode: Int) {
     this.visibility =  if (isVisible) View.VISIBLE else nonVisibleMode
 }
 
-fun View.show() {
-    this.visibility = View.VISIBLE
+fun <T> MutableLiveData<Resource<T>>?.showLoading() {
+    this?.postValue(Resource.loading(null))
 }
 
-
-fun View.makeGone() {
-    this.visibility = View.GONE
+fun <T> MutableLiveData<Resource<T>>?.hideLoading() {
+    this?.value = Resource.hideLoading(null)
 }
 
-fun View.makeInvisible() {
-    visibility = View.INVISIBLE
+fun <T> MutableLiveData<Resource<T>>?.success(data: T) {
+    this?.value = Resource.success(data)
 }
 
-fun Button.disableButton() {
-    isEnabled = false
-    alpha = 0.7f
+fun <T> MutableLiveData<Resource<T>>?.failure(error: Throwable?) {
+    this?.value = Resource.error(null, error)
 }
 
-fun Button.enableButton() {
-    isEnabled = true
-    alpha = 1.0f
-}
 
 class SafeClickListener(
     private val interval: Int = 500,

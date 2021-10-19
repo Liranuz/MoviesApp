@@ -4,10 +4,10 @@ import android.content.Context
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.pilltracker.movies.constants.Const
-import com.pilltracker.movies.network.ApiEndPoint
-import com.pilltracker.movies.network.NetworkController
-import com.pilltracker.movies.network.NetworkControllerImpl
+import com.pilltracker.movies.data.network.ApiEndPoint
+import com.pilltracker.movies.data.network.NetworkConstants
+import com.pilltracker.movies.data.network.NetworkController
+import com.pilltracker.movies.data.network.NetworkControllerImpl
 import com.pilltracker.pilltracker_next.di.qualifiers.ApplicationContext
 import com.pilltracker.pilltracker_next.di.qualifiers.ErrorsInterceptor
 import com.pilltracker.pilltracker_next.di.qualifiers.HeaderInterceptor
@@ -29,7 +29,6 @@ class NetworkModule {
     companion object {
         const val TIMEOUT = 60L
     }
-
 
     @Provides
     @Singleton
@@ -70,7 +69,7 @@ class NetworkModule {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .baseUrl(Const.baseUrl)
+            .baseUrl(NetworkConstants.baseUrl)
             .client(okHttpClient)
             .build()
 

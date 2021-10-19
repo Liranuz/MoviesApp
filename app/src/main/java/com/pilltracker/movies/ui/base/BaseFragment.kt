@@ -51,13 +51,8 @@ abstract class BaseFragment<VM : ViewModel, VB : ViewBinding>(
             }
         } catch (e: ClassCastException){
             e.printStackTrace()
-
         }
-
     }
-
-
-    fun getBaseActivity() = baseActivity
 
 
     override fun onCreateView(
@@ -89,14 +84,6 @@ abstract class BaseFragment<VM : ViewModel, VB : ViewBinding>(
            baseActivity.showLoading(show)
         }
     }
-
-
-
-
-//    fun handleNetworkError(throwable: Throwable?){
-//        baseActivity.showError(throwable)
-//    }
-
 
 
 }

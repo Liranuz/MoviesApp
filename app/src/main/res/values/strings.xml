@@ -9,4 +9,9 @@
     <string name="popular">Popular</string>
     <string name="displaying">Displaying</string>
     <string name="favorites">Favorites</string>
+    <string name="error_timeout">We have a temporary error. Please try us again in a few minutes.</string>
+    <string name="error_404">Data not found</string>
+    <string name="general_error">Error occured. Try again later</string>
+
+
 </resources>

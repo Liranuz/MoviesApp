@@ -59,7 +59,6 @@ abstract class BaseActivity<VM : ViewModel, VB : ViewBinding>
 
     }
 
-
     fun showLoading(show: Boolean){
         if(show) {
             baseBinding.loadingView.bringToFront()

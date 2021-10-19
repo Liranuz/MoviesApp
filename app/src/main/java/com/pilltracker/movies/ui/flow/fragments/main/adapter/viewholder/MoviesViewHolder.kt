@@ -1,6 +1,6 @@
 package com.pilltracker.movies.ui.flow.fragments.main.adapter.viewholder
 
-import com.pilltracker.movies.constants.Const
+import com.pilltracker.movies.data.network.NetworkConstants
 import com.pilltracker.movies.databinding.MovieListItemBinding
 import com.pilltracker.movies.model.Result
 import com.pilltracker.movies.ui.base.BaseViewHolder
@@ -19,7 +19,7 @@ class MoviesViewHolder(
             it.posterPath?.let { path ->
                 if(path.isNotEmpty()){
                     Picasso.with(itemView.context)
-                        .load(Const.MOVIEDB_SMALL_POSTER_URL + path)
+                        .load(NetworkConstants.MOVIEDB_SMALL_POSTER_URL + path)
                         .into(binding.movieThumbnail)
                 }
             }
