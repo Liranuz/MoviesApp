@@ -28,5 +28,7 @@ class MainViewModel @Inject constructor(): BaseViewModel() {
 
     }
 
+
+    
     fun isFavorite(id: Int?): Boolean =  favorites.find { it.id == id } != null
 }
