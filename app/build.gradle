@@ -97,6 +97,7 @@ dependencies {
     //picasso
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
+    
 
     //room
     implementation "androidx.room:room-runtime:$rootProject.room_version"
